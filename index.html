@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weliger Souza | Ecossistema Digital para Gestão de Obras</title>
+  <meta name="description" content="Portfólio de Weliger Souza — Técnico de Planejamento, Analista de Dados e Desenvolvedor Power Platform especializado em gestão de obras baseada na ISO 9001." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* =====================================================
+       DESIGN SYSTEM — TOKENS & RESET
+    ===================================================== */
+    :root {
+      --navy-950:   #040d1a;
+      --navy-900:   #070f1f;
+      --navy-800:   #0b1628;
+      --navy-700:   #0f1f38;
+      --slate-700:  #1e2d44;
+      --slate-600:  #2a3f5f;
+      --slate-500:  #3a5278;
+      --blue-metal: #3b82f6;
+      --blue-glow:  #60a5fa;
+      --emerald:    #10b981;
+      --emerald-lg: #34d399;
+      --cyan:       #06b6d4;
+      --text-primary:   #f0f6ff;
+      --text-secondary: #94a3b8;
+      --text-muted:     #64748b;
+      --border:         rgba(59,130,246,0.18);
+      --border-active:  rgba(59,130,246,0.55);
+      --glass:          rgba(7,15,31,0.75);
+      --glass-card:     rgba(11,22,40,0.85);
+      --font: 'Inter', system-ui, sans-serif;
+      --radius: 14px;
+      --radius-lg: 22px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--navy-950);
+      color: var(--text-primary);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* =====================================================
+       SCROLL-DRIVEN BACKGROUND — IMAGE SEQUENCE
+       =====================================================
+       HOW IT WORKS:
+       1. The canvas below covers the full screen (fixed, z-index: -1).
+       2. As the user scrolls, the JS maps scroll progress (0–1) to
+          a frame index in the `frames` array below.
+       3. Each frame is pre-loaded for smooth playback.
+
+       TO USE YOUR OWN IMAGES:
+       • Open the <script> section at the bottom of this file.
+       • Find the comment "---- CONFIGURE YOUR IMAGE FRAMES HERE ----"
+       • The array is already auto-generated for all 300 files in this
+         folder (videio portifólio_000.jpg … videio portifólio_299.jpg).
+       • If your filenames differ, update the template string in
+         buildFrameList() accordingly.
+    ===================================================== */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      object-fit: cover;
+    }
+
+    /* Dark gradient overlay so text stays legible */
+    #bg-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(
+        to bottom,
+        rgba(4,13,26,0.72) 0%,
+        rgba(4,13,26,0.60) 40%,
+        rgba(4,13,26,0.68) 70%,
+        rgba(4,13,26,0.80) 100%
+      );
+    }
+
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(4,13,26,0.65);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--blue-glow), var(--emerald));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1.5px;
+      background: var(--blue-metal);
+      transform: scaleX(0);
+      transition: transform 0.25s ease;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-cta {
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--blue-metal), var(--emerald));
+      color: white !important;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+    .nav-cta::after { display: none !important; }
+
+    /* =====================================================
+       SECTION WRAPPER
+    ===================================================== */
+    section {
+      position: relative;
+      z-index: 10;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* =====================================================
+       HERO SECTION
+    ===================================================== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-active);
+      background: rgba(59,130,246,0.08);
+      color: var(--blue-glow);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: fadeInDown 0.6s ease both;
+    }
+
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--emerald);
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 1.25rem;
+      animation: fadeInDown 0.7s 0.1s ease both;
+    }
+
+    .hero-title .accent {
+      background: linear-gradient(135deg, var(--blue-glow) 0%, var(--emerald-lg) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      animation: fadeInDown 0.7s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeInDown 0.7s 0.3s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--blue-metal), var(--emerald));
+      color: white;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+      box-shadow: 0 4px 24px rgba(59,130,246,0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(59,130,246,0.5);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border-active);
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      background: rgba(59,130,246,0.06);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(59,130,246,0.15);
+      border-color: var(--blue-glow);
+      transform: translateY(-2px);
+    }
+
+    /* =====================================================
+       HERO — RIGHT SIDE (Photo + Anti-Gravity FX)
+    ===================================================== */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 480px;
+      animation: fadeInUp 0.8s 0.2s ease both;
+    }
+
+    .photo-ring {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    .photo-ring::before {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      background: linear-gradient(135deg, var(--blue-metal), var(--emerald)) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      animation: spin-slow 12s linear infinite;
+    }
+
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+
+    .photo-ring img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 3px solid var(--slate-700);
+      filter: drop-shadow(0 0 30px rgba(59,130,246,0.35));
+    }
+
+    /* Floating geometric elements */
+    .float-el {
+      position: absolute;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      backdrop-filter: blur(10px);
+      background: var(--glass-card);
+      border: 1px solid var(--border);
+      color: var(--blue-glow);
+      padding: 0.65rem 0.9rem;
+      white-space: nowrap;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .float-el .icon { font-size: 1.1rem; margin-right: 0.4rem; }
+
+    .fe-1 { top: 10%; left: -60px; animation: float1 5s ease-in-out infinite; color: var(--emerald); border-color: rgba(16,185,129,0.3); }
+    .fe-2 { top: 35%; right: -50px; animation: float2 6s ease-in-out infinite; color: var(--blue-glow); }
+    .fe-3 { bottom: 20%; left: -70px; animation: float3 4.5s ease-in-out infinite; color: var(--cyan); border-color: rgba(6,182,212,0.3); }
+    .fe-4 { bottom: 35%; right: -55px; animation: float1 7s ease-in-out infinite reverse; color: var(--emerald-lg); border-color: rgba(52,211,153,0.3); }
+    .fe-5 { top: 5%; right: 20px; animation: float2 5.5s ease-in-out infinite; color: var(--blue-glow); font-size: 0.72rem; }
+
+    @keyframes float1 {
+      0%, 100% { transform: translateY(0px) rotate(-2deg); }
+      50%       { transform: translateY(-14px) rotate(2deg); }
+    }
+    @keyframes float2 {
+      0%, 100% { transform: translateY(0px) rotate(3deg); }
+      50%       { transform: translateY(-18px) rotate(-2deg); }
+    }
+    @keyframes float3 {
+      0%, 100% { transform: translateY(-6px) rotate(-1deg); }
+      50%       { transform: translateY(10px) rotate(2deg); }
+    }
+
+    /* Particle dots */
+    .particle-field {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--blue-metal);
+      opacity: 0;
+      animation: particle-anim var(--dur, 4s) var(--delay, 0s) ease-in-out infinite;
+    }
+
+    @keyframes particle-anim {
+      0%   { opacity: 0; transform: translate(0, 0) scale(0); }
+      30%  { opacity: 0.6; }
+      70%  { opacity: 0.4; }
+      100% { opacity: 0; transform: translate(var(--tx, 20px), var(--ty, -30px)) scale(1.5); }
+    }
+
+    /* =====================================================
+       SECTION TITLES
+    ===================================================== */
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue-glow);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 20px; height: 2px;
+      background: var(--blue-glow);
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .section-title .grad {
+      background: linear-gradient(135deg, var(--blue-glow), var(--emerald-lg));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-desc {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.75;
+      max-width: 620px;
+    }
+
+    /* =====================================================
+       ABOUT SECTION
+    ===================================================== */
+    #about {
+      padding: 7rem 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-content .section-desc {
+      margin-bottom: 1.25rem;
+      max-width: 100%;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.75rem 0 2rem;
+    }
+
+    .tag {
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: rgba(59,130,246,0.1);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .tag:hover {
+      background: rgba(59,130,246,0.2);
+      color: var(--text-primary);
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.9rem 2rem;
+      border-radius: var(--radius);
+      background: var(--glass-card);
+      border: 1.5px solid var(--border-active);
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 0.92rem;
+      text-decoration: none;
+      transition: all 0.25s;
+      box-shadow: 0 4px 20px rgba(59,130,246,0.12);
+    }
+
+    .btn-download:hover {
+      background: rgba(59,130,246,0.15);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(59,130,246,0.25);
+    }
+
+    .btn-download svg { flex-shrink: 0; }
+
+    /* Stats cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .stat-card {
+      padding: 1.4rem 1.25rem;
+      border-radius: var(--radius);
+      background: var(--glass-card);
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+      backdrop-filter: blur(12px);
+    }
+
+    .stat-card:hover {
+      border-color: var(--border-active);
+      transform: translateY(-3px);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--blue-glow), var(--emerald-lg));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 0.25rem;
+    }
+
+    /* =====================================================
+       ECOSYSTEM SECTION
+    ===================================================== */
+    #ecosystem {
+      padding: 7rem 0;
+      background: linear-gradient(to bottom, transparent, rgba(11,22,40,0.5) 20%, rgba(11,22,40,0.5) 80%, transparent);
+    }
+
+    .ecosystem-header { text-align: center; margin-bottom: 4rem; }
+    .ecosystem-header .section-desc { margin: 0 auto; }
+
+    .iso-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(16,185,129,0.4);
+      background: rgba(16,185,129,0.08);
+      color: var(--emerald-lg);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .eco-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 4rem;
+    }
+
+    .eco-card {
+      padding: 1.75rem;
+      border-radius: var(--radius-lg);
+      background: var(--glass-card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .eco-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--card-color, var(--blue-metal)), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .eco-card:hover { transform: translateY(-6px); border-color: var(--border-active); }
+    .eco-card:hover::before { opacity: 1; }
+
+    .eco-card-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.1rem;
+      background: var(--icon-bg, rgba(59,130,246,0.12));
+      border: 1px solid var(--icon-border, rgba(59,130,246,0.25));
+    }
+
+    .eco-card h3 {
+      font-size: 0.97rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .eco-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* Video player mock */
+    .video-player {
+      border-radius: var(--radius-lg);
+      background: #000;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(59,130,246,0.12);
+      position: relative;
+    }
+
+    .video-topbar {
+      background: linear-gradient(135deg, var(--navy-800), var(--slate-700));
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .vt-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+
+    .vt-dot-r { background: #ff5f57; }
+    .vt-dot-y { background: #febc2e; }
+    .vt-dot-g { background: #28c840; }
+
+    .vt-title {
+      margin-left: 0.75rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .video-iframe-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      /* =====================================================
+         VIDEO DO YOUTUBE — COLE SEU LINK AQUI
+         Substitua "SEU_VIDEO_ID" pelo ID do seu vídeo do YouTube.
+         Exemplo: se seu link é https://www.youtube.com/watch?v=abc123
+         então VIDEO_ID = abc123
+         A linha ficará: src="https://www.youtube.com/embed/abc123"
+      ===================================================== */
+      background: linear-gradient(135deg, var(--navy-800) 0%, var(--slate-600) 100%);
+    }
+
+    .video-iframe-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background: linear-gradient(135deg, var(--navy-800), var(--slate-700));
+    }
+
+    .play-btn-wrap {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-metal), var(--emerald));
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 30px rgba(59,130,246,0.45);
+    }
+
+    .play-btn-wrap:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 45px rgba(59,130,246,0.65);
+    }
+
+    .video-placeholder p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    /* =====================================================
+       STEPPER / TIMELINE SECTION
+    ===================================================== */
+    #suite {
+      padding: 7rem 0;
+    }
+
+    .suite-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .stepper {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .stepper::before {
+      content: '';
+      position: absolute;
+      left: 32px;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--blue-metal) 0%, var(--emerald) 100%);
+      opacity: 0.25;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 2rem;
+      padding: 0 0 3.5rem;
+      position: relative;
+      opacity: 0.35;
+      transform: translateX(-10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .step.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .step-dot-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-dot {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--glass-card);
+      backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.35rem;
+      transition: all 0.4s ease;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(59,130,246,0);
+    }
+
+    .step.active .step-dot {
+      border-color: var(--step-color, var(--blue-metal));
+      background: var(--step-bg, rgba(59,130,246,0.15));
+      box-shadow: 0 0 24px var(--step-glow, rgba(59,130,246,0.4));
+    }
+
+    .step-content {
+      padding-top: 0.85rem;
+    }
+
+    .step-app-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--step-tag-bg, rgba(59,130,246,0.12));
+      color: var(--step-color, var(--blue-glow));
+      border: 1px solid var(--step-tag-border, rgba(59,130,246,0.25));
+      margin-bottom: 0.75rem;
+    }
+
+    .step-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.6rem;
+      transition: color 0.3s;
+    }
+
+    .step.active .step-title {
+      color: var(--step-color, var(--blue-glow));
+    }
+
+    .step-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 600px;
+    }
+
+    .step-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .step-feat {
+      padding: 0.25rem 0.7rem;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* =====================================================
+       SKILLS SECTION
+    ===================================================== */
+    #skills {
+      padding: 7rem 0;
+      background: linear-gradient(to bottom, transparent, rgba(11,22,40,0.4) 20%, rgba(11,22,40,0.4) 80%, transparent);
+    }
+
+    .skills-header { text-align: center; margin-bottom: 3.5rem; }
+
+    .skills-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .skills-col-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue-glow);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skills-col-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .skills-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .skill-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 0.9rem;
+      border-radius: 8px;
+      background: var(--glass-card);
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .skill-row:hover {
+      border-color: var(--border-active);
+      background: rgba(59,130,246,0.07);
+    }
+
+    .skill-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--emerald);
+    }
+
+    /* =====================================================
+       CONTACT SECTION
+    ===================================================== */
+    #contact {
+      padding: 7rem 0 4rem;
+      text-align: center;
+    }
+
+    .contact-card {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 3.5rem;
+      border-radius: var(--radius-lg);
+      background: var(--glass-card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue-metal), var(--emerald), var(--cyan));
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.25rem;
+      margin: 2rem 0;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.1rem;
+      border-radius: var(--radius);
+      background: rgba(59,130,246,0.07);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .contact-item:hover {
+      background: rgba(59,130,246,0.14);
+      color: var(--text-primary);
+      border-color: var(--border-active);
+    }
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    footer span {
+      color: var(--blue-glow);
+    }
+
+    /* =====================================================
+       SCROLL PROGRESS BAR
+    ===================================================== */
+    #scroll-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-metal), var(--emerald));
+      z-index: 200;
+      width: 0%;
+      transition: width 0.05s linear;
+    }
+
+    /* =====================================================
+       ANIMATIONS
+    ===================================================== */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Observe-triggered fade-in */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =====================================================
+       MOBILE / RESPONSIVE
+    ===================================================== */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+        padding-top: 2rem;
+      }
+
+      .hero-subtitle { max-width: 100%; }
+      .hero-actions { justify-content: center; }
+
+      .hero-visual { height: 320px; }
+      .photo-ring { width: 200px; height: 200px; }
+
+      .fe-1 { left: -20px; font-size: 0.7rem; }
+      .fe-2 { right: -10px; font-size: 0.7rem; }
+      .fe-3 { left: -15px; font-size: 0.7rem; }
+      .fe-4 { right: -10px; font-size: 0.7rem; }
+      .fe-5 { display: none; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .eco-cards { grid-template-columns: 1fr; }
+
+      .skills-cols { grid-template-columns: 1fr; }
+
+      .step { grid-template-columns: 50px 1fr; gap: 1.25rem; }
+      .step-dot { width: 50px; height: 50px; font-size: 1.1rem; }
+      .stepper::before { left: 25px; }
+
+      .contact-card { padding: 2rem 1.25rem; }
+
+      #about, #ecosystem, #suite, #skills, #contact { padding: 4.5rem 0; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { letter-spacing: -0.5px; }
+      .eco-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll progress bar -->
+  <div id="scroll-bar"></div>
+
+  <!-- Background Canvas (scroll-driven image sequence) -->
+  <canvas id="bg-canvas"></canvas>
+  <div id="bg-overlay"></div>
+
+  <!-- =====================================================
+       NAVIGATION
+  ===================================================== -->
+  <nav id="main-nav">
+    <div class="nav-logo">WS // Ecossistema Digital</div>
+    <ul class="nav-links">
+      <li><a href="#hero">Início</a></li>
+      <li><a href="#about">Sobre</a></li>
+      <li><a href="#ecosystem">Ecossistema</a></li>
+      <li><a href="#suite">Suíte</a></li>
+      <li><a href="#skills">Competências</a></li>
+      <li><a href="#contact">Contato</a></li>
+    </ul>
+    <a href="curriculo_weliger.pdf" class="nav-cta" download>📄 Currículo</a>
+  </nav>
+
+  <!-- =====================================================
+       HERO SECTION
+  ===================================================== -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-grid">
+
+        <!-- Left column -->
+        <div class="hero-left">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Disponível para projetos
+          </div>
+
+          <h1 class="hero-title">
+            Ecossistema Digital para<br>
+            <span class="accent">Gestão de Obras</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Integração de dados, automação de processos e engenharia de soluções
+            alinhadas à ISO 9001 — do orçamento ao BI, tudo conectado.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#ecosystem" class="btn-primary" id="hero-cta-eco">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              Ver Ecossistema
+            </a>
+            <a href="#about" class="btn-secondary" id="hero-cta-about">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Sobre mim
+            </a>
+          </div>
+        </div>
+
+        <!-- Right column — photo + anti-gravity -->
+        <div class="hero-visual" id="hero-visual">
+
+          <div class="particle-field" id="particle-field"></div>
+
+          <div class="photo-ring">
+            <!--
+              ================================================================
+              FOTO PESSOAL — SUBSTITUA O src ABAIXO PELO CAMINHO DA SUA FOTO
+              Exemplo: src="foto_weliger.jpg"
+              ================================================================
+            -->
+            <img
+              src="foto_weliger.jpg"
+              alt="Weliger Souza — Técnico de Planejamento"
+              id="hero-photo"
+              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\' viewBox=\'0 0 300 300\'%3E%3Crect width=\'300\' height=\'300\' fill=\'%230b1628\'/%3E%3Ccircle cx=\'150\' cy=\'110\' r=\'55\' fill=\'%231e2d44\'/%3E%3Cellipse cx=\'150\' cy=\'260\' rx=\'90\' ry=\'60\' fill=\'%231e2d44\'/%3E%3Ctext x=\'150\' y=\'170\' text-anchor=\'middle\' fill=\'%2360a5fa\' font-family=\'Inter,sans-serif\' font-size=\'13\' font-weight=\'600\'%3EWeliger Souza%3C/text%3E%3C/svg%3E'"
+            />
+          </div>
+
+          <!-- Floating data elements -->
+          <div class="float-el fe-1"><span class="icon">📊</span>Power BI</div>
+          <div class="float-el fe-2"><span class="icon">⚙️</span>ISO 9001</div>
+          <div class="float-el fe-3"><span class="icon">🔗</span>AppSheet</div>
+          <div class="float-el fe-4"><span class="icon">🐍</span>Python</div>
+          <div class="float-el fe-5"><span class="icon">🏗️</span>BIM Autodesk</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       ABOUT / APRESENTAÇÃO PESSOAL
+  ===================================================== -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-content reveal">
+          <p class="section-eyebrow">Apresentação</p>
+          <h2 class="section-title">Weliger <span class="grad">Souza</span></h2>
+
+          <p class="section-desc">
+            Técnico de Planejamento e Desenvolvedor de Soluções Digitais com trajetória
+            na Omega Service e Estrada de Ferro Carajás (Vale). Atuo na interseção entre
+            engenharia operacional e tecnologia, criando ecossistemas integrados de dados
+            que transformam informação em decisão estratégica.
+          </p>
+
+          <p class="section-desc">
+            Especialista em Power BI, Power Apps, AppSheet e Python, com foco em
+            automação de processos, implantação de sistemas alinhados à ISO 9001 e
+            desenvolvimento de dashboards gerenciais para obras de grande porte.
+          </p>
+
+          <div class="about-tags">
+            <span class="tag">Engenharia de Produção</span>
+            <span class="tag">Téc. Eletromecânica — IETAAM</span>
+            <span class="tag">Lean Six Sigma Green Belt</span>
+            <span class="tag">BIM Autodesk</span>
+            <span class="tag">Machine Learning</span>
+            <span class="tag">Parauapebas, PA</span>
+          </div>
+
+          <!--
+            BOTÃO DE DOWNLOAD — Coloque o arquivo do currículo
+            na mesma pasta do index.html e nomeie "curriculo_weliger.pdf"
+            ou altere o href abaixo.
+          -->
+          <a href="curriculo_weliger.pdf" class="btn-download" download id="btn-download-cv">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+            Baixar Currículo
+          </a>
+        </div>
+
+        <div class="stats-grid reveal">
+          <div class="stat-card">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">Apps corporativos desenvolvidos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">ISO</div>
+            <div class="stat-label">9001 — Processos implantados</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">BI</div>
+            <div class="stat-label">Dashboards estratégicos em Power BI</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">EFC</div>
+            <div class="stat-label">Estrada de Ferro Carajás / Vale</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       ECOSYSTEM — A GRANDE OBRA
+  ===================================================== -->
+  <section id="ecosystem">
+    <div class="container">
+
+      <div class="ecosystem-header reveal">
+        <span class="iso-badge">🏅 ISO 9001 Compliant</span>
+        <h2 class="section-title">O <span class="grad">Ecossistema</span> — A Grande Obra</h2>
+        <p class="section-desc">
+          Um ecossistema integrado que une todas as frentes da gestão de obras em um único
+          ambiente digital, alimentando painéis de Business Intelligence em tempo real.
+        </p>
+      </div>
+
+      <!-- Cards -->
+      <div class="eco-cards">
+
+        <div class="eco-card reveal" style="--card-color: #3b82f6;">
+          <div class="eco-card-icon" style="--icon-bg: rgba(59,130,246,0.12); --icon-border: rgba(59,130,246,0.25);">⚠️</div>
+          <h3>Não Conformidades</h3>
+          <p>Registro, rastreio e tratamento de NCs com fluxo de aprovação e fechamento de loop, garantindo melhoria contínua.</p>
+        </div>
+
+        <div class="eco-card reveal" style="--card-color: #10b981;">
+          <div class="eco-card-icon" style="--icon-bg: rgba(16,185,129,0.12); --icon-border: rgba(16,185,129,0.25);">📈</div>
+          <h3>Avanço Físico</h3>
+          <p>Medição em tempo real do progresso das obras, com visualização por etapa, responsável e período de referência.</p>
+        </div>
+
+        <div class="eco-card reveal" style="--card-color: #f59e0b;">
+          <div class="eco-card-icon" style="--icon-bg: rgba(245,158,11,0.12); --icon-border: rgba(245,158,11,0.25);">🔧</div>
+          <h3>Retrabalhos</h3>
+          <p>Identificação e custeio de retrabalhos por causa raiz, permitindo ações preventivas e redução de desperdício.</p>
+        </div>
+
+        <div class="eco-card reveal" style="--card-color: #8b5cf6;">
+          <div class="eco-card-icon" style="--icon-bg: rgba(139,92,246,0.12); --icon-border: rgba(139,92,246,0.25);">📅</div>
+          <h3>Programação 6W</h3>
+          <p>Planejamento de seis semanas com visão antecipada das frentes, alinhando recursos, mão de obra e insumos.</p>
+        </div>
+
+        <div class="eco-card reveal" style="--card-color: #06b6d4;">
+          <div class="eco-card-icon" style="--icon-bg: rgba(6,182,212,0.12); --icon-border: rgba(6,182,212,0.25);">🔍</div>
+          <h3>Inspeções de Qualidade</h3>
+          <p>Checklists digitais, registros fotográficos e relatórios técnicos gerados diretamente em campo pelo time de qualidade.</p>
+        </div>
+
+        <div class="eco-card reveal" style="--card-color: #ef4444;">
+          <div class="eco-card-icon" style="--icon-bg: rgba(239,68,68,0.12); --icon-border: rgba(239,68,68,0.25);">🦺</div>
+          <h3>Segurança (SST)</h3>
+          <p>Relatos de quase-acidentes, gestão de riscos e eventos M3 integrados ao painel de segurança do trabalho em obras.</p>
+        </div>
+
+      </div>
+
+      <!-- Video player -->
+      <div class="video-player reveal">
+        <div class="video-topbar">
+          <span class="vt-dot vt-dot-r"></span>
+          <span class="vt-dot vt-dot-y"></span>
+          <span class="vt-dot vt-dot-g"></span>
+          <span class="vt-title">Tratamento de Dados — Explicação Técnica</span>
+        </div>
+        <div class="video-iframe-wrap" id="video-wrap">
+          <!--
+            ==============================================================
+            VÍDEO DO YOUTUBE — COLE O ID DO SEU VÍDEO ABAIXO
+            Descomente a linha do <iframe> e substitua SEU_VIDEO_ID pelo
+            ID real do seu vídeo do YouTube.
+            Exemplo: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+                     → ID = dQw4w9WgXcQ
+            ==============================================================
+          -->
+          <!-- <iframe src="https://www.youtube.com/embed/SEU_VIDEO_ID?rel=0&showinfo=0" allowfullscreen></iframe> -->
+
+          <!-- Placeholder (remova este bloco ao ativar o iframe) -->
+          <div class="video-placeholder" id="video-placeholder">
+            <div class="play-btn-wrap" id="play-btn" title="Adicione o link do YouTube no código">
+              <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <p>Aguardando link do YouTube<br><small style="color:var(--text-muted)">Insira o ID do vídeo no código</small></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SUITE DE APLICAÇÕES — STEPPER VERTICAL
+  ===================================================== -->
+  <section id="suite">
+    <div class="container">
+
+      <div class="suite-header reveal">
+        <p class="section-eyebrow">Fluxo de Dados</p>
+        <h2 class="section-title">A Suíte de <span class="grad">Aplicações</span></h2>
+        <p class="section-desc" style="margin: 0 auto;">
+          Cada aplicação atua em um ponto específico do ciclo de vida da obra,
+          garantindo rastreabilidade completa do orçamento à operação.
+        </p>
+      </div>
+
+      <div class="stepper" id="stepper">
+
+        <!-- Step 1 — FNAX -->
+        <div class="step" id="step-1"
+          style="
+            --step-color: #3b82f6;
+            --step-bg: rgba(59,130,246,0.12);
+            --step-glow: rgba(59,130,246,0.4);
+            --step-tag-bg: rgba(59,130,246,0.1);
+            --step-tag-border: rgba(59,130,246,0.3);
+          ">
+          <div class="step-dot-wrap">
+            <div class="step-dot">🏗️</div>
+          </div>
+          <div class="step-content">
+            <span class="step-app-tag">App 01 · Início</span>
+            <h3 class="step-title">Fnax</h3>
+            <p class="step-desc">
+              O técnico orçamentista cadastra o orçamento completo da obra e realiza a abertura
+              formal do projeto. Os gestores responsáveis são notificados automaticamente e a
+              demanda avança no fluxo somente após aprovação hierárquica.
+            </p>
+            <div class="step-features">
+              <span class="step-feat">Cadastro de orçamento</span>
+              <span class="step-feat">Abertura de obra</span>
+              <span class="step-feat">Notificação de gestores</span>
+              <span class="step-feat">Fluxo de aprovação</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 — SINAPSE -->
+        <div class="step" id="step-2"
+          style="
+            --step-color: #10b981;
+            --step-bg: rgba(16,185,129,0.12);
+            --step-glow: rgba(16,185,129,0.4);
+            --step-tag-bg: rgba(16,185,129,0.1);
+            --step-tag-border: rgba(16,185,129,0.3);
+          ">
+          <div class="step-dot-wrap">
+            <div class="step-dot">🧠</div>
+          </div>
+          <div class="step-content">
+            <span class="step-app-tag">App 02 · Planejamento & Execução</span>
+            <h3 class="step-title">Sinapse</h3>
+            <p class="step-desc">
+              O planejador insere o avanço físico da obra e configura a programação de
+              seis semanas (6W). Os encarregados de campo preenchem o Diário de Obra
+              digital, garantindo registro cronológico de todas as atividades e recursos.
+            </p>
+            <div class="step-features">
+              <span class="step-feat">Avanço físico</span>
+              <span class="step-feat">Programação 6 Semanas</span>
+              <span class="step-feat">Diário de Obra</span>
+              <span class="step-feat">Dashboard gerencial</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 — EXCELÊNCIA -->
+        <div class="step" id="step-3"
+          style="
+            --step-color: #8b5cf6;
+            --step-bg: rgba(139,92,246,0.12);
+            --step-glow: rgba(139,92,246,0.4);
+            --step-tag-bg: rgba(139,92,246,0.1);
+            --step-tag-border: rgba(139,92,246,0.3);
+          ">
+          <div class="step-dot-wrap">
+            <div class="step-dot">⭐</div>
+          </div>
+          <div class="step-content">
+            <span class="step-app-tag">App 03 · Qualidade</span>
+            <h3 class="step-title">Excelência</h3>
+            <p class="step-desc">
+              Focado na equipe de qualidade, o Excelência centraliza inspeções técnicas,
+              registro de não conformidades, relatórios de ensaio e checklists de
+              verificação, tudo alinhado aos requisitos da ISO 9001.
+            </p>
+            <div class="step-features">
+              <span class="step-feat">Inspeções técnicas</span>
+              <span class="step-feat">Registro de NCs</span>
+              <span class="step-feat">Relatórios de ensaio</span>
+              <span class="step-feat">ISO 9001</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 — SAFETY -->
+        <div class="step" id="step-4"
+          style="
+            --step-color: #ef4444;
+            --step-bg: rgba(239,68,68,0.12);
+            --step-glow: rgba(239,68,68,0.4);
+            --step-tag-bg: rgba(239,68,68,0.1);
+            --step-tag-border: rgba(239,68,68,0.3);
+          ">
+          <div class="step-dot-wrap">
+            <div class="step-dot">🦺</div>
+          </div>
+          <div class="step-content">
+            <span class="step-app-tag">App 04 · SST</span>
+            <h3 class="step-title">Safety</h3>
+            <p class="step-desc">
+              Plataforma de Segurança do Trabalho para registro de relatos de
+              quase-acidentes, mapeamento de riscos, gestão de eventos M3 e
+              acompanhamento de indicadores de saúde e segurança em obras.
+            </p>
+            <div class="step-features">
+              <span class="step-feat">Quase-acidentes</span>
+              <span class="step-feat">Mapeamento de riscos</span>
+              <span class="step-feat">Eventos M3</span>
+              <span class="step-feat">Indicadores SST</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 — TRACK -->
+        <div class="step" id="step-5"
+          style="
+            --step-color: #f59e0b;
+            --step-bg: rgba(245,158,11,0.12);
+            --step-glow: rgba(245,158,11,0.4);
+            --step-tag-bg: rgba(245,158,11,0.1);
+            --step-tag-border: rgba(245,158,11,0.3);
+          ">
+          <div class="step-dot-wrap">
+            <div class="step-dot">🚛</div>
+          </div>
+          <div class="step-content">
+            <span class="step-app-tag">App 05 · Transporte & Logística</span>
+            <h3 class="step-title">Track</h3>
+            <p class="step-desc">
+              Gestão completa de frotas e logística de transporte da obra. Controle
+              de veículos, viagens, abastecimentos e disponibilidade de equipamentos,
+              integrado ao painel de custos operacionais da obra.
+            </p>
+            <div class="step-features">
+              <span class="step-feat">Gestão de frotas</span>
+              <span class="step-feat">Logística de transporte</span>
+              <span class="step-feat">Controle de abastecimento</span>
+              <span class="step-feat">Custos operacionais</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SKILLS SECTION
+  ===================================================== -->
+  <section id="skills">
+    <div class="container">
+      <div class="skills-header reveal">
+        <p class="section-eyebrow">Competências</p>
+        <h2 class="section-title">Hard Skills & <span class="grad">Ferramentas</span></h2>
+      </div>
+
+      <div class="skills-cols">
+
+        <div class="reveal">
+          <p class="skills-col-title">Plataformas & Dev</p>
+          <div class="skills-list">
+            <div class="skill-row"><span>Power BI (Avançado)</span><span class="skill-dot"></span></div>
+            <div class="skill-row"><span>Power Apps</span><span class="skill-dot"></span></div>
+            <div class="skill-row"><span>AppSheet</span><span class="skill-dot"></span></div>
+            <div class="skill-row"><span>Python</span><span class="skill-dot"></span></div>
+            <div class="skill-row"><span>Google Workspace</span><span class="skill-dot"></span></div>
+            <div class="skill-row"><span>N8N (Automação)</span><span class="skill-dot" style="background:var(--blue-glow)"></span></div>
+            <div class="skill-row"><span>SQL (Intermediário)</span><span class="skill-dot" style="background:var(--blue-glow)"></span></div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <p class="skills-col-title">Engenharia & Gestão</p>
+          <div class="skills-list">
+            <div class="skill-row"><span>BIM Autodesk</span><span class="skill-dot"></span></div>
+            <div class="skill-row"><span>ISO 9001</span><span class="skill-dot"></span></div>
+            <div class="skill-row"><span>Lean Six Sigma</span><span class="skill-dot"></span></div>
+            <div class="skill-row"><span>Planejamento Integrado</span><span class="skill-dot"></span></div>
+            <div class="skill-row"><span>Gestão Visual</span><span class="skill-dot" style="background:var(--blue-glow)"></span></div>
+            <div class="skill-row"><span>Automação Operacional</span><span class="skill-dot" style="background:var(--blue-glow)"></span></div>
+            <div class="skill-row"><span>Governança de Dados</span><span class="skill-dot" style="background:var(--blue-glow)"></span></div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <p class="skills-col-title">Estratégico & IA</p>
+          <div class="skills-list">
+            <div class="skill-row"><span>Machine Learning</span><span class="skill-dot"></span></div>
+            <div class="skill-row"><span>Business Intelligence</span><span class="skill-dot"></span></div>
+            <div class="skill-row"><span>Integração com IA</span><span class="skill-dot"></span></div>
+            <div class="skill-row"><span>Modelagem de Dados</span><span class="skill-dot"></span></div>
+            <div class="skill-row"><span>Transformação Digital</span><span class="skill-dot" style="background:var(--blue-glow)"></span></div>
+            <div class="skill-row"><span>Gestão da Mudança</span><span class="skill-dot" style="background:var(--blue-glow)"></span></div>
+            <div class="skill-row"><span>Desenvolvimento Low-Code</span><span class="skill-dot" style="background:var(--blue-glow)"></span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       CONTACT SECTION
+  ===================================================== -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-card reveal">
+        <p class="section-eyebrow" style="justify-content:center;">Contato</p>
+        <h2 class="section-title" style="text-align:center;">Vamos <span class="grad">Construir</span> Juntos?</h2>
+        <p style="color:var(--text-secondary); font-size:0.95rem; max-width:480px; margin:0 auto; text-align:center;">
+          Aberto a colaborações em projetos de transformação digital,
+          gestão de obras e ecossistemas integrados de dados.
+        </p>
+
+        <div class="contact-info">
+          <a href="tel:+5594981291642" class="contact-item" id="contact-phone">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.47 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.54a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            (94) 98129-1642
+          </a>
+
+          <a href="mailto:weligersouza011@gmail.com" class="contact-item" id="contact-email">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            weligersouza011@gmail.com
+          </a>
+
+          <a href="https://linkedin.com/in/weligersouza" target="_blank" rel="noopener" class="contact-item" id="contact-linkedin">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            @weligersouza/linkedin
+          </a>
+
+          <span class="contact-item" id="contact-location">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Parauapebas, PA
+          </span>
+        </div>
+
+        <a href="curriculo_weliger.pdf" class="btn-primary" style="margin-top:0.5rem; display:inline-flex;" download id="contact-cv-btn">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Baixar Currículo Completo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       FOOTER
+  ===================================================== -->
+  <footer>
+    <p>© 2025 <span>Weliger Souza</span> · Ecossistema Digital para Gestão de Obras · Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ===================================================== -->
+  <script>
+  (function () {
+    'use strict';
+
+    /* ===========================================================
+       ---- CONFIGURE YOUR IMAGE FRAMES HERE ----
+       The array below is AUTO-GENERATED for all 300 images found
+       in this folder (videio portifólio_000.jpg … _299.jpg).
+
+       If your filenames differ, edit the buildFrameList() function
+       or replace the `frames` array directly with your file paths.
+       Example (manual):
+         const frames = [
+           "frames/img_001.jpg",
+           "frames/img_002.jpg",
+           ...
+         ];
+    =========================================================== */
+    function buildFrameList() {
+      const list = [];
+      const total = 300; // Total number of frames (0 to 299)
+      for (let i = 0; i < total; i++) {
+        const num = String(i).padStart(3, '0');
+        // ↓ UPDATE THIS TEMPLATE if your file naming differs
+        list.push(`videio portifólio_${num}.jpg`);
+      }
+      return list;
+    }
+
+    const frames = buildFrameList();
+    const TOTAL_FRAMES = frames.length;
+
+    /* --- Canvas setup --- */
+    const canvas = document.getElementById('bg-canvas');
+    const ctx    = canvas.getContext('2d');
+    let   currentFrameIndex = 0;
+    let   loadedImages = new Array(TOTAL_FRAMES).fill(null);
+    let   loadedCount  = 0;
+
+    function resizeCanvas() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+      drawFrame(currentFrameIndex);
+    }
+
+    function drawFrame(index) {
+      const img = loadedImages[index];
+      if (!img || !img.complete) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      /* Cover-fit: fill canvas while maintaining aspect ratio */
+      const cw = canvas.width, ch = canvas.height;
+      const iw = img.naturalWidth, ih = img.naturalHeight;
+      const scale = Math.max(cw / iw, ch / ih);
+      const sw = iw * scale, sh = ih * scale;
+      const sx = (cw - sw) / 2, sy = (ch - sh) / 2;
+      ctx.drawImage(img, sx, sy, sw, sh);
+    }
+
+    /* Pre-load all images */
+    function preloadImages() {
+      frames.forEach((src, i) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => {
+          loadedImages[i] = img;
+          loadedCount++;
+          /* Draw first frame as soon as it loads */
+          if (i === 0) drawFrame(0);
+        };
+        img.onerror = () => { loadedImages[i] = null; };
+      });
+    }
+
+    /* --- Scroll → frame mapping --- */
+    function onScroll() {
+      const scrollTop  = window.scrollY || document.documentElement.scrollTop;
+      const maxScroll  = document.documentElement.scrollHeight - window.innerHeight;
+      const progress   = maxScroll > 0 ? Math.min(scrollTop / maxScroll, 1) : 0;
+
+      /* Scroll progress bar */
+      document.getElementById('scroll-bar').style.width = (progress * 100) + '%';
+
+      /* Image sequence */
+      const targetIndex = Math.min(
+        Math.floor(progress * TOTAL_FRAMES),
+        TOTAL_FRAMES - 1
+      );
+
+      if (targetIndex !== currentFrameIndex) {
+        currentFrameIndex = targetIndex;
+        requestAnimationFrame(() => drawFrame(currentFrameIndex));
+      }
+
+      /* Stepper activation */
+      activateSteps();
+    }
+
+    /* --- Scroll-activated steppers --- */
+    function activateSteps() {
+      const steps = document.querySelectorAll('.step');
+      steps.forEach((step) => {
+        const rect = step.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.65) {
+          step.classList.add('active');
+        }
+      });
+    }
+
+    /* --- Reveal on scroll (IntersectionObserver) --- */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* --- Particle field --- */
+    function createParticles() {
+      const field = document.getElementById('particle-field');
+      if (!field) return;
+      for (let i = 0; i < 18; i++) {
+        const p = document.createElement('div');
+        p.classList.add('particle');
+        const size = Math.random() * 4 + 2;
+        p.style.cssText = `
+          width: ${size}px; height: ${size}px;
+          top: ${Math.random() * 100}%;
+          left: ${Math.random() * 100}%;
+          --dur: ${(Math.random() * 4 + 3).toFixed(1)}s;
+          --delay: ${(Math.random() * 3).toFixed(1)}s;
+          --tx: ${(Math.random() * 80 - 40).toFixed(0)}px;
+          --ty: ${(Math.random() * -60 - 20).toFixed(0)}px;
+          background: ${Math.random() > 0.5 ? 'var(--blue-metal)' : 'var(--emerald)'};
+        `;
+        field.appendChild(p);
+      }
+    }
+
+    /* --- Mouse parallax on hero photo --- */
+    document.addEventListener('mousemove', (e) => {
+      const hero = document.getElementById('hero-visual');
+      if (!hero) return;
+      const rect = hero.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top  + rect.height / 2;
+      const dx = (e.clientX - cx) / window.innerWidth;
+      const dy = (e.clientY - cy) / window.innerHeight;
+
+      hero.querySelectorAll('.float-el').forEach((el, i) => {
+        const factor = (i % 2 === 0 ? 1 : -1) * (i + 1) * 3;
+        el.style.transform = `translate(${dx * factor}px, ${dy * factor}px)`;
+      });
+    });
+
+    /* --- Init --- */
+    resizeCanvas();
+    preloadImages();
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    createParticles();
+
+    /* Smooth nav scroll */
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    /* Initial call */
+    onScroll();
+  })();
+  </script>
+
+</body>
+</html>
